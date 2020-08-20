@@ -92,3 +92,7 @@ cassandra@cqlsh:shoutapp> SELECT * FROM users WHERE password='password1';
  username | email        | name | password
 ----------+--------------+------+-----------
      jogo | jo@email.com | dodo | password1
+
+
+altername the name ( only work with primary key)
+ ALTER TABLE users RENAME  name to full_name
