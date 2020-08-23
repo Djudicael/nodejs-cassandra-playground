@@ -68,3 +68,34 @@ exports.addUser = async (req, res, next) => {
     return res.status(200).json("user added");
 
 };
+
+
+exports.editUser = async (req, res, next) => {
+    const user = req.body;
+
+    //const username = req.params.username;
+
+    const insertUser = 'INSERT INTO users(username , password, email, name) VALUES(?,?,?,?)';
+
+    const result = await client.execute(insertUser, [user.username, user.password, user.email, user.name])
+        .catch((error) => {
+            console.log(error);
+            res.status(404).json({ "error": "oups" })
+        });
+    console.log(result);
+    return res.status(200).json("user added");
+};
+
+exports.deleteUser = async (req, res, next) => {
+    const username = req.params.username;
+
+    const insertUser = 'DELETE FROM users WHERE username =?';
+
+    const result = await client.execute(insertUser, [username])
+        .catch((error) => {
+            console.log(error);
+            res.status(404).json({ "error": "oups" })
+        });
+    console.log(result);
+    return res.status(200).json(`user ${username} was deleted`);
+};
